@@ -1,0 +1,317 @@
+/* ========================
+   RESET & BASE
+======================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #0a0a0a;
+  color: #e0e0e0;
+  min-height: 100vh;
+}
+
+/* ========================
+   HEADER
+======================== */
+header {
+  background-color: #111111;
+  padding: 1.5rem 2rem;
+  border-bottom: 2px solid #e11d48;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #e11d48;
+  letter-spacing: 2px;
+}
+
+header .tagline {
+  font-size: 14px;
+  color: #666;
+  margin-top: 4px;
+}
+
+/* ========================
+   MAIN
+======================== */
+main {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* ========================
+   SECTION TITLE
+======================== */
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 1rem;
+  border-left: 3px solid #e11d48;
+  padding-left: 10px;
+}
+
+/* ========================
+   SUMMARY CARDS
+======================== */
+#summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.card {
+  background-color: #111111;
+  border-radius: 12px;
+  padding: 1.25rem;
+  border: 0.5px solid #2a0a0a;
+  text-align: center;
+}
+
+.card-label {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.card-value {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.green {
+  color: #4ade80;
+}
+
+.red {
+  color: #e11d48;
+}
+
+#form-section {
+  background-color: #111111;
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 0.5px solid #2a0a0a;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 13px;
+  color: #666;
+}
+
+.form-group input,
+.form-group select {
+  background-color: #0a0a0a;
+  border: 0.5px solid #3a0a0a;
+  color: #e0e0e0;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #e11d48;
+}
+
+.form-group select option {
+  background-color: #111111;
+}
+
+#addBtn {
+  width: 100%;
+  padding: 12px;
+  background-color: #e11d48;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+#addBtn:hover {
+  background-color: #be123c;
+}
+
+#addBtn:active {
+  transform: scale(0.98);
+}
+
+/* ========================
+   EXPENSE LIST
+======================== */
+#expense-section {
+  background-color: #111111;
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 0.5px solid #2a0a0a;
+}
+
+#emptyMsg {
+  text-align: center;
+  color: #444;
+  font-size: 14px;
+  padding: 2rem 0;
+}
+
+.expense-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #0a0a0a;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 8px;
+  border: 0.5px solid #2a0a0a;
+}
+
+.expense-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.expense-name {
+  font-size: 14px;
+  color: #e0e0e0;
+}
+
+.expense-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.expense-amount {
+  font-size: 15px;
+  font-weight: 600;
+  color: #e11d48;
+}
+
+.del-btn {
+  background: none;
+  border: none;
+  color: #444;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 2px 8px;
+  border-radius: 4px;
+  transition: color 0.2s, background-color 0.2s;
+}
+
+.del-btn:hover {
+  color: #e11d48;
+  background-color: #1a0a0a;
+}
+
+/* ========================
+   CATEGORY BADGES
+======================== */
+.badge {
+  font-size: 11px;
+  padding: 3px 10px;
+  border-radius: 99px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.badge-food          { background: #1a2a1a; color: #4ade80; }
+.badge-transport     { background: #1a1a2a; color: #60a5fa; }
+.badge-housing       { background: #2a1a0a; color: #fb923c; }
+.badge-entertainment { background: #2a0a2a; color: #e879f9; }
+.badge-health        { background: #2a0a0a; color: #f87171; }
+.badge-other         { background: #1a1a1a; color: #a1a1aa; }
+
+/* ========================
+   CHART SECTION
+======================== */
+#chart-section {
+  background-color: #111111;
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 0.5px solid #2a0a0a;
+}
+
+.chart-container {
+  position: relative;
+  width: 100%;
+  height: 280px;
+}
+
+
+#legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 1rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #666;
+}
+
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+}
+
+/* ========================
+   FOOTER
+======================== */
+footer {
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 13px;
+  color: #333;
+  border-top: 0.5px solid #1a0a0a;
+  margin-top: 2rem;
+}
+
+/* ========================
+   RESPONSIVE
+======================== */
+@media (max-width: 600px) {
+  #summary {
+    grid-template-columns: 1fr;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  header h1 {
+    font-size: 26px;
+  }
+}
