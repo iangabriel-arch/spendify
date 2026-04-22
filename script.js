@@ -1,6 +1,7 @@
 let budget = 0;
 let expenses = [];
 let chart = null;
+let searchQuery = '';
 
 const catColors = {
   food: '#4ade80',
@@ -10,6 +11,7 @@ const catColors = {
   health: '#f87171',
   other: '#a1a1aa'
 };
+const searchInput = document.getElementById('searchInput');
 
 const budgetInput = document.getElementById('budgetInput');
 const nameInput = document.getElementById('nameInput');
@@ -22,13 +24,27 @@ const remainingDisplay = document.getElementById('remainingDisplay');
 
 async function fetchAdvice() {
   try {
-    const response = await fetch('https://api.adviceslip.com/advice');
-    const data = await response.json();
-    document.getElementById('adviceText').textContent = '💬 ' + data.slip.advice;
-  } catch (error) {
-    document.getElementById('adviceText').textContent = 'Spend wisely and save more!';
+    const res = await fetch('https://api.adviceslip.com/advice');
+    const data = await res.json();
+
+    let advice = data.slip.advice;
+
+    const totalSpent = expenses.reduce((t, e) => t + e.amount, 0);
+
+    if (totalSpent > budget) {
+      advice = "⚠ You're over budget. Cut down on spending!";
+    }
+
+    document.getElementById('adviceText').textContent = '💬 ' + advice;
+  } catch {
+    document.getElementById('adviceText').textContent =
+      'Track your spending daily 💰';
   }
 }
+searchInput.addEventListener('input', function(e) {
+  searchQuery = e.target.value.toLowerCase();
+  renderExpenses();
+});
 
 function handleAdd() {
   const budgetVal = parseFloat(budgetInput.value);
@@ -89,12 +105,19 @@ function updateSummary() {
 }
 
 function renderExpenses() {
-  if (expenses.length === 0) {
-    expenseList.innerHTML = '<p id="emptyMsg">No expenses yet. Add one above!</p>';
+  const filteredExpenses = expenses.filter(function(expense) {
+    return (
+      expense.name.toLowerCase().includes(searchQuery) ||
+      expense.category.toLowerCase().includes(searchQuery)
+    );
+  });
+
+  if (filteredExpenses.length === 0) {
+    expenseList.innerHTML = '<p>No matching expenses found</p>';
     return;
   }
 
-  expenseList.innerHTML = expenses.map(function(expense) {
+  expenseList.innerHTML = filteredExpenses.map(function(expense) {
     return `
       <div class="expense-item">
         <div class="expense-left">
@@ -103,7 +126,7 @@ function renderExpenses() {
         </div>
         <div class="expense-right">
           <span class="expense-amount">-KSh${expense.amount.toFixed(2)}</span>
-          <button class="del-btn" onclick="deleteExpense(${expense.id})">x</button>
+          <button class="del-btn" data-id="${expense.id}">x</button>
         </div>
       </div>
     `;
