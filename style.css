@@ -1,243 +1,195 @@
-/* ========================
-   RESET & BASE
-======================== */
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
+  transition: all 0.2s ease;
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #0a0a0a;
-  color: #e0e0e0;
-  min-height: 100vh;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: #0b0f17;
+  color: #e5e7eb;
 }
 
-/* ========================
-   HEADER
-======================== */
-header {
-  background-color: #111111;
-  padding: 1.5rem 2rem;
-  border-bottom: 2px solid #e11d48;
-  text-align: center;
+.app {
+  max-width: 800px;
+  margin: auto;
+  padding: 24px;
 }
 
-header h1 {
-  font-size: 32px;
-  font-weight: 700;
-  color: #e11d48;
-  letter-spacing: 2px;
-}
-
-header .tagline {
-  font-size: 14px;
-  color: #666;
-  margin-top: 4px;
-}
-
-/* ========================
-   MAIN
-======================== */
-main {
-  max-width: 900px;
-  margin: 2rem auto;
-  padding: 0 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-/* ========================
-   SECTION TITLE
-======================== */
-.section-title {
-  font-size: 16px;
+.title {
+  font-size: 28px;
   font-weight: 600;
-  color: #fff;
-  margin-bottom: 1rem;
-  border-left: 3px solid #e11d48;
-  padding-left: 10px;
-}
-
-/* ========================
-   SUMMARY CARDS
-======================== */
-#summary {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
+  margin-bottom: 16px;
+  text-align: center;
 }
 
 .card {
-  background-color: #111111;
-  border-radius: 12px;
-  padding: 1.25rem;
-  border: 0.5px solid #2a0a0a;
+  background: #111827;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 14px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+}
+
+.section-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 14px;
+  border-left: 3px solid #22c55e;
+  padding-left: 8px;
+}
+
+.summary {
+  display: flex;
+  justify-content: space-between;
   text-align: center;
 }
 
-.card-label {
-  font-size: 13px;
-  color: #666;
-  margin-bottom: 8px;
+.summary div {
+  flex: 1;
 }
 
-.card-value {
-  font-size: 24px;
+.summary span {
+  display: block;
+  font-size: 12px;
+  color: #9ca3af;
+  margin-bottom: 4px;
+}
+
+.summary strong {
+  font-size: 18px;
   font-weight: 600;
 }
 
-.green {
-  color: #4ade80;
-}
-
-.red {
-  color: #e11d48;
-}
-
-#form-section {
-  background-color: #111111;
-  border-radius: 12px;
-  padding: 1.5rem;
-  border: 0.5px solid #2a0a0a;
-}
-
-.form-grid {
+.form {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  margin-bottom: 1rem;
+  gap: 12px;
 }
 
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+.form .section-title {
+  grid-column: span 2;
+  margin-bottom: 0;
 }
 
-.form-group label {
-  font-size: 13px;
-  color: #666;
+.form button {
+  grid-column: span 2;
 }
 
-.form-group input,
-.form-group select {
-  background-color: #0a0a0a;
-  border: 0.5px solid #3a0a0a;
-  color: #e0e0e0;
-  border-radius: 8px;
-  padding: 10px 12px;
-  font-size: 14px;
-  outline: none;
-  transition: border-color 0.2s;
-}
-
-.form-group input:focus,
-.form-group select:focus {
-  border-color: #e11d48;
-}
-
-.form-group select option {
-  background-color: #111111;
-}
-
-#addBtn {
+input, select {
   width: 100%;
   padding: 12px;
-  background-color: #e11d48;
-  color: #fff;
+  border-radius: 10px;
+  border: 1px solid #1f2937;
+  background: #0b0f17;
+  color: white;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  margin: 0;
+}
+
+input:focus, select:focus {
+  border-color: #22c55e;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(34,197,94,0.2);
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
   border: none;
-  border-radius: 8px;
-  font-size: 15px;
+  background: #22c55e;
+  color: #022c22;
   font-weight: 600;
+  font-size: 15px;
+  font-family: 'Inter', sans-serif;
   cursor: pointer;
-  transition: background-color 0.2s, transform 0.1s;
 }
 
-#addBtn:hover {
-  background-color: #be123c;
+button:hover {
+  opacity: 0.9;
 }
 
-#addBtn:active {
+button:active {
   transform: scale(0.98);
 }
 
-/* ========================
-   EXPENSE LIST
-======================== */
-#expense-section {
-  background-color: #111111;
-  border-radius: 12px;
-  padding: 1.5rem;
-  border: 0.5px solid #2a0a0a;
+.search-container {
+  position: relative;
+  margin-bottom: 12px;
 }
 
-#emptyMsg {
-  text-align: center;
-  color: #444;
+.search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
   font-size: 14px;
-  padding: 2rem 0;
+}
+
+#searchInput {
+  padding-left: 34px;
 }
 
 .expense-item {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  background-color: #0a0a0a;
-  border-radius: 8px;
-  padding: 12px 16px;
+  align-items: center;
+  padding: 12px;
+  border-radius: 10px;
+  background: #0b0f17;
   margin-bottom: 8px;
-  border: 0.5px solid #2a0a0a;
 }
 
 .expense-left {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 
 .expense-name {
+  font-weight: 500;
   font-size: 14px;
-  color: #e0e0e0;
 }
 
 .expense-right {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
 }
 
 .expense-amount {
-  font-size: 15px;
+  color: #f87171;
   font-weight: 600;
-  color: #e11d48;
+  font-size: 14px;
 }
 
 .del-btn {
   background: none;
   border: none;
-  color: #444;
-  font-size: 18px;
+  color: #4b5563;
+  font-size: 16px;
   cursor: pointer;
   padding: 2px 8px;
-  border-radius: 4px;
-  transition: color 0.2s, background-color 0.2s;
+  border-radius: 6px;
+  width: auto;
+  transition: all 0.2s;
 }
 
 .del-btn:hover {
-  color: #e11d48;
-  background-color: #1a0a0a;
+  color: #f87171;
+  background: #1f2937;
 }
 
-/* ========================
-   CATEGORY BADGES
-======================== */
 .badge {
+  padding: 4px 10px;
+  border-radius: 999px;
   font-size: 11px;
-  padding: 3px 10px;
-  border-radius: 99px;
   font-weight: 600;
   text-transform: capitalize;
 }
@@ -249,84 +201,82 @@ main {
 .badge-health        { background: #2a0a0a; color: #f87171; }
 .badge-other         { background: #1a1a1a; color: #a1a1aa; }
 
-/* ========================
-   CHART SECTION
-======================== */
-#chart-section {
-  background-color: #111111;
-  border-radius: 12px;
-  padding: 1.5rem;
-  border: 0.5px solid #2a0a0a;
+#myChart {
+  height: 280px !important;
+  width: 100% !important;
+  display: block;
+  max-height: 280px;
 }
-
-.chart-container {
-  position: relative;
-  width: 100%;
-  height: 280px;
-}
-
 
 #legend {
+  margin-top: 14px;
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
-  margin-bottom: 1rem;
+  gap: 10px;
 }
 
 .legend-item {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
   font-size: 13px;
-  color: #666;
+  color: #9ca3af;
 }
 
 .legend-dot {
   width: 10px;
   height: 10px;
-  border-radius: 2px;
+  display: inline-block;
+  border-radius: 50%;
 }
 
-/* ========================
-   FOOTER
-======================== */
+#adviceText {
+  font-size: 14px;
+  color: #9ca3af;
+  font-style: italic;
+  line-height: 1.6;
+  text-align: center;
+}
+
+#emptyMsg {
+  text-align: center;
+  color: #4b5563;
+  font-size: 14px;
+  padding: 1.5rem 0;
+  margin: 0;
+}
+
 footer {
   text-align: center;
-  padding: 1.5rem;
-  font-size: 13px;
-  color: #333;
-  border-top: 0.5px solid #1a0a0a;
-  margin-top: 2rem;
+  font-size: 12px;
+  color: #4b5563;
+  padding: 1rem 0;
+  border-top: 0.5px solid #1f2937;
+  margin-top: 8px;
 }
 
-/* ========================
-   RESPONSIVE
-======================== */
 @media (max-width: 600px) {
-  #summary {
+  .app {
+    padding: 12px;
+  }
+
+  .title {
+    font-size: 22px;
+  }
+
+  .form {
     grid-template-columns: 1fr;
   }
 
-  .form-grid {
-    grid-template-columns: 1fr;
+  .form .section-title {
+    grid-column: span 1;
   }
 
-  header h1 {
-    font-size: 26px;
+  .form button {
+    grid-column: span 1;
   }
-}
-.search-container {
-  position: relative;
-}
 
-.search-icon {
-  position: absolute;
-  left: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #888;
-}
-
-#searchInput {
-  padding-left: 32px;
+  .summary strong {
+    font-size: 14px;
+  }
 }

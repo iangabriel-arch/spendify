@@ -1,133 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Spendly</title>
-    <link rel="stylesheet" href="style.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Spendify - Track your daily expenses and manage your budget in Kenyan Shillings">
+  <title>Spendify</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
 
-  <body>
+<div class="app">
 
-    <!-- HEADER -->
-    <header>
-      <div class="header-content">
-        <h1>Spendly</h1>
-        <p class="tagline">Track your spending smartly</p>
-      </div>
-    </header>
+  <h1 class="title">💰 Spendify</h1>
 
-    <!-- MAIN CONTENT -->
-    <main>
+  <div class="card summary">
+    <div>
+      <span>Budget</span>
+      <strong id="budgetDisplay">KSh0.00</strong>
+    </div>
+    <div>
+      <span>Spent</span>
+      <strong id="spentDisplay">KSh0.00</strong>
+    </div>
+    <div>
+      <span>Remaining</span>
+      <strong id="remainingDisplay">KSh0.00</strong>
+    </div>
+  </div>
 
-      <!-- SECTION 1: SUMMARY CARDS -->
-      <section id="summary">
-        <div class="card">
-          <p class="card-label">Monthly Budget</p>
-          <h2 class="card-value green" id="budgetDisplay">ksh 0.00</h2>
-        </div>
-        <div class="card">
-          <p class="card-label">Total Spent</p>
-          <h2 class="card-value red" id="spentDisplay">ksh 0.00</h2>
-        </div>
-        <div class="card">
-          <p class="card-label">Remaining Balance</p>
-          <h2 class="card-value" id="remainingDisplay">ksh 0.00</h2>
-        </div>
-      </section>
+  <div class="card form">
+    <h3 class="section-title">Set Budget & Add Expense</h3>
+    <input type="number" id="budgetInput" placeholder="Set budget (KSh)">
+    <input type="text" id="nameInput" placeholder="Expense name">
+    <input type="number" id="amountInput" placeholder="Amount (KSh)">
+    <select id="categoryInput">
+      <option value="food">Food</option>
+      <option value="transport">Transport</option>
+      <option value="housing">Housing</option>
+      <option value="entertainment">Entertainment</option>
+      <option value="health">Health</option>
+      <option value="other">Other</option>
+    </select>
+    <button onclick="handleAdd()">+ Add Expense</button>
+  </div>
 
-      <!-- SECTION 2: FORM -->
-      <section id="form-section">
-        <!-- CURRENCY SELECTOR -->
+  <div class="card expenses">
+    <h3 class="section-title">My Expenses</h3>
+    <div class="search-container">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" placeholder="Search expenses...">
+    </div>
+    <div id="expenseList"></div>
+  </div>
 
+  <div class="card">
+    <h3 class="section-title">Spending by Category</h3>
+    <canvas id="myChart"></canvas>
+    <div id="legend"></div>
+  </div>
 
+  <div class="card">
+    <h3 class="section-title">Daily Advice</h3>
+    <p id="adviceText">💬 Loading advice...</p>
+  </div>
 
-        <h3 class="section-title">Set Budget & Add Expense</h3>
-        <div class="form-grid">
-          <div class="form-group">
-            <label for="budgetInput">Monthly Budget (ksh)</label>
-            <input
-              type="number"
-              id="budgetInput"
-              placeholder="e.g. 1000"
-              min="0"
-            />
-          </div>
-          <div class="form-group">
-            <label for="nameInput">Expense Name</label>
-            <input
-              type="text"
-              id="nameInput"
-              placeholder="e.g. Groceries"
-            />
-          </div>
-          <div class="form-group">
-            <label for="amountInput">Amount (ksh)</label>
-            <input
-              type="number"
-              id="amountInput"
-              placeholder="e.g. 50"
-              min="0"
-            />
-          </div>
-          <div class="form-group">
-            <label for="categoryInput">Category</label>
-            <select id="categoryInput">
-              <option value="food">Food</option>
-              <option value="transport">Transport</option>
-              <option value="housing">Housing</option>
-              <option value="entertainment">Entertainment</option>
-              <option value="health">Health</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-        </div>
-        <button id="addBtn" onclick="handleAdd()">+ Add Expense</button>
-      </section>
+  <footer>
+    <p>Spendify &copy; 2025 | Built with HTML, CSS & JavaScript</p>
+  </footer>
 
-      <!-- SECTION 3: EXPENSE LIST -->
-      <section id="expense-section">
-        <h3 class="section-title">My Expenses</h3>
-        
-        <div class="search-container">
-  <span class="search-icon">🔍</span>
-  <input 
-    type="text" 
-    id="searchInput" 
-    placeholder="Search expenses..."
-  />
 </div>
 
-
-          <p id="emptyMsg">No expenses yet. Add one above!</p>
-        </div>
-      </section>
-
-      <!-- SECTION 4: CHART -->
-      <section id="chart-section">
-        <h3 class="section-title">Spending by Category</h3>
-        <div id="legend"></div>
-        <div class="chart-container">
-          <canvas
-            id="myChart"
-            role="img"
-            aria-label="Doughnut chart showing spending by category"
-          >
-            No chart data yet.
-          </canvas>
-        </div>
-      </section>
-
-    </main>
-
-    <!-- FOOTER -->
-    <footer>
-      <p>Spendly &copy; 2025 | Built with HTML, CSS & JavaScript</p>
-    </footer>
-
-    <!-- JAVASCRIPT -->
-    <script src="script.js"></script>
-
-  </body>
+<script src="script.js"></script>
+</body>
 </html>

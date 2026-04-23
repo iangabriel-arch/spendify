@@ -11,7 +11,6 @@ const catColors = {
   health: '#f87171',
   other: '#a1a1aa'
 };
-const searchInput = document.getElementById('searchInput');
 
 const budgetInput = document.getElementById('budgetInput');
 const nameInput = document.getElementById('nameInput');
@@ -21,29 +20,39 @@ const expenseList = document.getElementById('expenseList');
 const budgetDisplay = document.getElementById('budgetDisplay');
 const spentDisplay = document.getElementById('spentDisplay');
 const remainingDisplay = document.getElementById('remainingDisplay');
+const searchInput = document.getElementById('searchInput');
 
 async function fetchAdvice() {
   try {
     const res = await fetch('https://api.adviceslip.com/advice');
     const data = await res.json();
-
     let advice = data.slip.advice;
-
     const totalSpent = expenses.reduce((t, e) => t + e.amount, 0);
-
-    if (totalSpent > budget) {
-      advice = "⚠ You're over budget. Cut down on spending!";
+    if (totalSpent > budget && budget > 0) {
+      advice = "You're over budget. Cut down on spending!";
     }
-
     document.getElementById('adviceText').textContent = '💬 ' + advice;
   } catch {
-    document.getElementById('adviceText').textContent =
-      'Track your spending daily 💰';
+    document.getElementById('adviceText').textContent = 'Track your spending daily 💰';
   }
 }
+
 searchInput.addEventListener('input', function(e) {
   searchQuery = e.target.value.toLowerCase();
   renderExpenses();
+});
+
+document.addEventListener('click', function(e) {
+  if (e.target.classList.contains('del-btn')) {
+    const id = parseInt(e.target.getAttribute('data-id'));
+    deleteExpense(id);
+  }
+});
+
+document.addEventListener('keydown', function(event) {
+  if (event.key === 'Enter') {
+    handleAdd();
+  }
 });
 
 function handleAdd() {
@@ -98,7 +107,7 @@ function updateSummary() {
   remainingDisplay.textContent = 'KSh' + remaining.toFixed(2);
 
   if (remaining < 0) {
-    remainingDisplay.style.color = '#e11d48';
+    remainingDisplay.style.color = '#f87171';
   } else {
     remainingDisplay.style.color = '#4ade80';
   }
@@ -112,8 +121,13 @@ function renderExpenses() {
     );
   });
 
+  if (expenses.length === 0) {
+    expenseList.innerHTML = '<p id="emptyMsg">No expenses yet. Add one above!</p>';
+    return;
+  }
+
   if (filteredExpenses.length === 0) {
-    expenseList.innerHTML = '<p>No matching expenses found</p>';
+    expenseList.innerHTML = '<p id="emptyMsg">No matching expenses found</p>';
     return;
   }
 
@@ -179,7 +193,7 @@ function renderChart() {
         data: data,
         backgroundColor: colors,
         borderWidth: 2,
-        borderColor: '#111111'
+        borderColor: '#111827'
       }]
     },
     options: {
@@ -198,13 +212,8 @@ function render() {
   updateSummary();
   renderExpenses();
   renderChart();
+  fetchAdvice();
 }
-
-document.addEventListener('keydown', function(event) {
-  if (event.key === 'Enter') {
-    handleAdd();
-  }
-});
 
 fetchAdvice();
 render();
